@@ -1,0 +1,20 @@
+name: Sync multiple branches
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - development
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge development -> main
+        uses: devmasx/merge-branch@v1.3.1
+        with:
+          type: now
+          from_branch: development
+          target_branch: main
